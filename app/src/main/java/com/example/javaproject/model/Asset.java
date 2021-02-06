@@ -1,5 +1,7 @@
 package com.example.javaproject.model;
 
+import androidx.annotation.NonNull;
+
 import java.security.PublicKey;
 
 public class Asset {
@@ -39,5 +41,11 @@ public class Asset {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getName();
     }
 }
