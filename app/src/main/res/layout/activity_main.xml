@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    tools:context=".view.MainActivity"
+    android:gravity="center">
 
-    <TextView
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggle_layout_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:singleSelection="true"
+        >
+        <Button
+            android:id="@+id/list_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_layout"
+            style="?attr/materialButtonOutlinedStyle"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/grid_btn"
+            android:text="@string/grid_layout"
+            style="?attr/materialButtonOutlinedStyle"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
