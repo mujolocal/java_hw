@@ -1,6 +1,7 @@
 package com.example.javaproject.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,11 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
         setAssets();
         initViews();
+        initActions();
 
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(assets);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.recycleView.setAdapter(recyclerAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.recycleView.setLayoutManager(linearLayoutManager);
+
 
 
 
@@ -62,6 +65,23 @@ public class MainActivity extends AppCompatActivity {
         assets.add(new Asset("3"));
         assets.add(new Asset("4"));
         assets.add(new Asset("5"));
+    }
+    private void initActions(){
+        binding.gridBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(binding.getRoot().getContext(), 2);
+                binding.recycleView.setLayoutManager(gridLayoutManager);
+            }
+        });
+        binding.listBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext());
+                binding.recycleView.setLayoutManager(linearLayoutManager);
+            }
+        });
+
     }
 
     private void initViews(){
