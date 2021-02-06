@@ -12,14 +12,19 @@ import android.widget.Toast;
 
 import com.example.javaproject.R;
 import com.example.javaproject.databinding.ActivityMainBinding;
+import com.example.javaproject.model.Asset;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private Toast toast;
     private Context context;
     private static final String TAG = "MainActivity";
+    private ArrayList<Asset> assets = new ArrayList<Asset>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +32,31 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         context = getApplicationContext();
+        setAssets();
         initViews();
 
 
 
     }
+
+    private void setAssets() {
+        assets.add(new Asset("one"));
+        assets.add(new Asset("two"));
+        assets.add(new Asset("3"));
+        assets.add(new Asset("4"));
+        assets.add(new Asset("5"));
+        assets.add(new Asset("one"));
+        assets.add(new Asset("two"));
+        assets.add(new Asset("3"));
+        assets.add(new Asset("4"));
+        assets.add(new Asset("5"));
+        assets.add(new Asset("one"));
+        assets.add(new Asset("two"));
+        assets.add(new Asset("3"));
+        assets.add(new Asset("4"));
+        assets.add(new Asset("5"));
+    }
+
     private void initViews(){
         binding.toggleLayoutBtn.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
             @Override
