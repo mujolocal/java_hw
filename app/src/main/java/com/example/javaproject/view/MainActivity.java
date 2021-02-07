@@ -16,17 +16,24 @@ import com.example.javaproject.R;
 import com.example.javaproject.adapter.RecyclerAdapter;
 import com.example.javaproject.databinding.ActivityMainBinding;
 import com.example.javaproject.model.Asset;
+import com.example.javaproject.repo.remote.AnimeRepository;
+import com.example.javaproject.repo.remote.AnimeService;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private Toast toast;
     private static final String TAG = "MainActivity";
     private ArrayList<Asset> assets = new ArrayList<Asset>();
+    private AnimeService animeService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +86,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(binding.getRoot().getContext());
                 binding.recycleView.setLayoutManager(linearLayoutManager);
+            }
+        });
+        
+        binding.fetchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: fetching");
+                AnimeRepository animeRepository = AnimeRepository.getInstance();
+                animeRepository.getShibes().enqueue(new Callback<List<String>>() {
+                    @Override
+                    public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                        Log.d(TAG, "onResponse: "+response.body().toString());
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<String>> call, Throwable t) {
+
+                    }
+                });
+
             }
         });
 
