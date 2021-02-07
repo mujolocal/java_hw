@@ -19,18 +19,24 @@ public class RetrofitInstance {
 
     }
 
-    private static Retrofit getRetrofit() {
-        return new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
-                .client(getClient())
-                .build();
-    }
+//    private static Retrofit getRetrofit() {
+//        return new Retrofit.Builder()
+//                .baseUrl(BASE_URL)
+//                .addConverterFactory(MoshiConverterFactory.create())
+//                .client(getClient())
+//                .build();
+//    }
 
     // Step 3: Public method to access the new instance
     public static AnimeService getInstance() {
         if (INSTANCE == null)
-            INSTANCE = getRetrofit().create(AnimeService.class);
+//            INSTANCE = getRetrofit().create(AnimeService.class);
+            INSTANCE = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(MoshiConverterFactory.create())
+                    .client(getClient())
+                    .build()
+                    .create(AnimeService.class);
 
         return INSTANCE;
     }
@@ -38,7 +44,7 @@ public class RetrofitInstance {
 
     private static OkHttpClient getClient() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
         return new OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .build();

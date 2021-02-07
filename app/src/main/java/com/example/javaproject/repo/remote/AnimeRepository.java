@@ -1,6 +1,9 @@
 package com.example.javaproject.repo.remote;
 
+import com.example.javaproject.model.AnimeResponse;
 import com.example.javaproject.repo.RetrofitInstance;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -13,9 +16,9 @@ public class AnimeRepository {
 
     }
 
-    public Call<List<String>> getShibes() {
-        AnimeService shibeService = RetrofitInstance.getInstance();
-        return shibeService.getAnime();
+    public Call<AnimeResponse> getAnime() {
+        AnimeService animeService = RetrofitInstance.getInstance();
+        return animeService.getAnime();
     }
 
     public static AnimeRepository getInstance() {
