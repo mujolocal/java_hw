@@ -115,4 +115,10 @@
     <string name="grid_layout">Grid Layout</string>
     <string name="list_layout">List Layout</string>
     <string name="push_it">Push It</string>
+    <string name="next_screen">next screen</string>
+    <string name="anime_search">Anime Search</string>
+    <string name="fetch_url">fetch url</string>
+    <string name="anime_name">anime name</string>
+    <string name="_10">10</string>
+    <string name="synopsis">synopsis</string>
 </resources>

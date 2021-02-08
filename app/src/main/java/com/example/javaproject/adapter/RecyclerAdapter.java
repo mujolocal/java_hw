@@ -32,6 +32,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Adapte
         this.click = click;
     }
 
+    public void setAssets(ArrayList<Anime> assets) {
+        this.assets = assets;
+    }
+
     private static final String TAG = "RecyclerAdapter";
     @NonNull
     @Override

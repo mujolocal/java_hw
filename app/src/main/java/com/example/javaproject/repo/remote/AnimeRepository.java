@@ -16,9 +16,9 @@ public class AnimeRepository {
 
     }
 
-    public Call<AnimeResponse> getAnime() {
+    public Call<AnimeResponse> getAnime(String search) {
         AnimeService animeService = RetrofitInstance.getInstance();
-        return animeService.getAnime();
+        return animeService.getAnime(search);
     }
 
     public static AnimeRepository getInstance() {

@@ -28,16 +28,23 @@
             style="?attr/materialButtonOutlinedStyle"/>
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
-    <Button
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="fetch url"
-        android:id="@+id/fetch_btn"/>
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="next screen"
-        android:id="@+id/next_screeen"/>
+        android:orientation="horizontal">
+        <com.google.android.material.textfield.TextInputEditText
+            android:hint="@string/anime_search"
+            android:id="@+id/search_txt_input"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fetch_url"
+            android:id="@+id/fetch_btn"/>
+
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_view"
         android:layout_width="match_parent"

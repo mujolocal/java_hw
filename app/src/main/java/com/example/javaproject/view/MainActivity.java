@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private String chosenAnime = "chosen_anime";
     private Click click;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,26 +58,13 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         initActions();
         initObservers();
-        mainViewModel.fetchAnime();
+        mainViewModel.fetchAnime("aaaa");
         click = new Click(MainActivity.this);
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(assets, click);
+        recyclerAdapter = new RecyclerAdapter(assets, click);
         binding.recycleView.setAdapter(recyclerAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.recycleView.setLayoutManager(linearLayoutManager);
 
-
-        binding.nextScreeen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
-                Anime anime = new Anime("google.com", "https://dynaimage.cdn.cnn.com/cnn/q_auto,w_412,c_fill,g_auto,h_412,ar_1:1/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190718140828-astro-boy-tease-2.jpg",
-                        "capo man", false, "lots astuff happends then it ends",
-                        "action", "20", 10, "day 1", "end date",6,
-                        "amazing");
-                intent.putExtra(chosenAnime, anime);
-                startActivity(intent);
-            }
-        });
 
     }
 
@@ -117,11 +106,16 @@ public class MainActivity extends AppCompatActivity {
         binding.fetchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: fetching");
-                mainViewModel.fetchAnime();
+                Log.d(TAG, "onClick: "+binding.searchTxtInput.getText().toString());
+                assets.clear();
+                mainViewModel.fetchAnime(binding.searchTxtInput.getText().toString());
+                Log.d(TAG, "onClick: "+assets);
+                recyclerAdapter.setAssets(assets);
+                recyclerAdapter.notifyDataSetChanged();
 
             }
         });
+
 
     }
 

@@ -27,9 +27,9 @@ public class MainViewModel extends ViewModel {
 
    public LiveData<AnimeResponse> getAnimeResponse(){return animeResponse; }
 
-    public void fetchAnime() {
+    public void fetchAnime(String search) {
         AnimeRepository animeRepository = AnimeRepository.getInstance();
-        animeRepository.getAnime().enqueue(new Callback<AnimeResponse>() {
+        animeRepository.getAnime(search).enqueue(new Callback<AnimeResponse>() {
 
             @Override
             public void onResponse(Call<AnimeResponse> call, Response<AnimeResponse> response) {
