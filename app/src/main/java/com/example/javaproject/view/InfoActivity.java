@@ -2,9 +2,11 @@ package com.example.javaproject.view;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -34,6 +36,16 @@ public class InfoActivity extends AppCompatActivity {
         anime =(Anime) intent.getSerializableExtra(chosenAnime);
         Log.d(TAG, "onCreate: "+anime.toString());
         fillInfo();
+        binding.pushItButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: pushit button clivked");
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("sms:"));
+                intent.putExtra("sms_body",anime.getUrl());
+                startActivity(intent);
+            }
+        });
 
 
     }

@@ -114,4 +114,5 @@
     <string name="text_appearance_overline_label">Overline</string>
     <string name="grid_layout">Grid Layout</string>
     <string name="list_layout">List Layout</string>
+    <string name="push_it">Push It</string>
 </resources>
