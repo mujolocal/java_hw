@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private ArrayList<Anime> assets = new ArrayList<>();
     private MainViewModel mainViewModel;
+    private String chosenAnime = "chosen_anime";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,18 @@ public class MainActivity extends AppCompatActivity {
         binding.recycleView.setAdapter(recyclerAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.recycleView.setLayoutManager(linearLayoutManager);
-
+        binding.nextScreeen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+                Anime anime = new Anime("google.com", "https://dynaimage.cdn.cnn.com/cnn/q_auto,w_412,c_fill,g_auto,h_412,ar_1:1/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F190718140828-astro-boy-tease-2.jpg",
+                        "capo man", false, "lots astuff happends then it ends",
+                        "action", "20", 10, "day 1", "end date",6,
+                        "amazing");
+                intent.putExtra(chosenAnime, anime);
+                startActivity(intent);
+            }
+        });
 
     }
 

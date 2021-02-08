@@ -33,6 +33,11 @@
         android:layout_height="wrap_content"
         android:text="fetch url"
         android:id="@+id/fetch_btn"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="next screen"
+        android:id="@+id/next_screeen"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_view"
         android:layout_width="match_parent"

@@ -2,7 +2,9 @@ package com.example.javaproject.model;
 
 import androidx.annotation.NonNull;
 
-public class Anime {
+import java.io.Serializable;
+
+public class Anime implements Serializable {
 //"mal_id":10087,
 //         "url":"https://myanimelist.net/anime/10087/Fate_Zero",
 //         "image_url":"https://cdn.myanimelist.net/images/anime/2/73249.jpg?s=0ddd3d84549e11eda144df33626f97ae",
