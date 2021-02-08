@@ -23,6 +23,7 @@ import com.example.javaproject.model.AnimeResponse;
 import com.example.javaproject.model.Asset;
 import com.example.javaproject.repo.remote.AnimeRepository;
 import com.example.javaproject.repo.remote.AnimeService;
+import com.example.javaproject.viewModel.Click;
 import com.example.javaproject.viewModel.MainViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
@@ -40,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private ArrayList<Anime> assets = new ArrayList<>();
     private MainViewModel mainViewModel;
+    private RecyclerAdapter recyclerAdapter;
     private String chosenAnime = "chosen_anime";
+    private Click click;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +52,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
+
         initViews();
         initActions();
         initObservers();
         mainViewModel.fetchAnime();
-
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(assets);
+        click = new Click(MainActivity.this);
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(assets, click);
         binding.recycleView.setAdapter(recyclerAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.recycleView.setLayoutManager(linearLayoutManager);
+
+
         binding.nextScreeen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 setAssets(animeResponse);
             }
         });
+
+
     }
 
 
