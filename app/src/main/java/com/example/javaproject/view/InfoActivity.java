@@ -26,5 +26,12 @@ public class InfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         anime =(Anime) intent.getSerializableExtra(chosenAnime);
         Log.d(TAG, "onCreate: "+anime.toString());
+        fillInfo();
+    }
+
+    private void fillInfo(){
+        binding.animeName.setText(anime.getTitle());
+        binding.score.setText(String.valueOf(anime.getScore()));
+        binding.synopsis.setText(anime.getSynopsis());
     }
 }
