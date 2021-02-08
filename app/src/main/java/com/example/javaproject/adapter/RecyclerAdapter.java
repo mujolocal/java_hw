@@ -9,13 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.javaproject.databinding.AssetImageBinding;
+import com.example.javaproject.model.Anime;
 import com.example.javaproject.model.Asset;
 
 import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.AdapterViewHolder> {
-    private ArrayList<Asset> assets;
-    public RecyclerAdapter(ArrayList<Asset> assets){
+    private ArrayList<Anime> assets;
+    public RecyclerAdapter(ArrayList<Anime> assets){
         this.assets = assets;
     }
 
@@ -32,7 +33,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Adapte
 
     @Override
     public void onBindViewHolder(@NonNull AdapterViewHolder holder, int position) {
-        holder.setLayout(assets.get(position).getName());
+        holder.setLayout(assets.get(position).getTitle());
     }
 
     @Override

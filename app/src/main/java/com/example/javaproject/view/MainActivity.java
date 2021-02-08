@@ -1,6 +1,8 @@
 package com.example.javaproject.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import com.example.javaproject.R;
 import com.example.javaproject.adapter.RecyclerAdapter;
 import com.example.javaproject.databinding.ActivityMainBinding;
+import com.example.javaproject.model.Anime;
+import com.example.javaproject.model.AnimeResponse;
 import com.example.javaproject.model.Asset;
 import com.example.javaproject.repo.remote.AnimeRepository;
 import com.example.javaproject.repo.remote.AnimeService;
@@ -33,8 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private Toast toast;
     private static final String TAG = "MainActivity";
-    private ArrayList<Asset> assets = new ArrayList<Asset>();
-    private AnimeService animeService;
+    private ArrayList<Anime> assets = new ArrayList<>();
     private MainViewModel mainViewModel;
 
     @Override
@@ -42,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-
-        setAssets();
         initViews();
         initActions();
+        initObservers();
+        mainViewModel.fetchAnime();
 
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(assets);
         binding.recycleView.setAdapter(recyclerAdapter);
@@ -56,22 +60,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setAssets() {
-        assets.add(new Asset("one"));
-        assets.add(new Asset("two"));
-        assets.add(new Asset("3"));
-        assets.add(new Asset("4"));
-        assets.add(new Asset("5"));
-        assets.add(new Asset("one"));
-        assets.add(new Asset("two"));
-        assets.add(new Asset("3"));
-        assets.add(new Asset("4"));
-        assets.add(new Asset("5"));
-        assets.add(new Asset("one"));
-        assets.add(new Asset("two"));
-        assets.add(new Asset("3"));
-        assets.add(new Asset("4"));
-        assets.add(new Asset("5"));
+    private void initObservers(){
+        mainViewModel.getAnimeResponse().observe(this, new Observer<AnimeResponse>() {
+            @Override
+            public void onChanged(AnimeResponse animeResponse) {
+                setAssets(animeResponse);
+            }
+        });
+    }
+
+
+    private void setAssets(AnimeResponse animeResponse) {
+        Log.d(TAG, "setAssets: "+animeResponse);
+        for (Anime anime:animeResponse.getResults()){
+            assets.add(anime);
+        }
     }
 
     private void initActions() {
@@ -94,9 +97,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: fetching");
-
-                mainViewModel = new MainViewModel();
                 mainViewModel.fetchAnime();
+
             }
         });
 

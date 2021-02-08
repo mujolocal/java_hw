@@ -2,6 +2,8 @@ package com.example.javaproject.viewModel;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.javaproject.model.AnimeResponse;
@@ -21,9 +23,9 @@ import retrofit2.Response;
 
 public class MainViewModel extends ViewModel {
     private static final String TAG = "MainViewModel";
-    private String jsonString;
-    private JSONObject jsonObject;
-    private JSONArray jsonArray;
+    private  final MutableLiveData<AnimeResponse> animeResponse = new MutableLiveData<>();
+
+   public LiveData<AnimeResponse> getAnimeResponse(){return animeResponse; }
 
     public void fetchAnime() {
         AnimeRepository animeRepository = AnimeRepository.getInstance();
@@ -31,6 +33,7 @@ public class MainViewModel extends ViewModel {
 
             @Override
             public void onResponse(Call<AnimeResponse> call, Response<AnimeResponse> response) {
+                animeResponse.setValue(response.body());
                 Log.d(TAG, "onResponse: worked");
                 Log.d(TAG, "onResponse: "+response.body().toString());
                 Log.d(TAG, "onResponse: "+call.toString());
@@ -43,19 +46,19 @@ public class MainViewModel extends ViewModel {
         });
     }
 
-    private void parseJson(Response<List<String>> response){
-        jsonString = response.body().toString();
-        try {
-            jsonObject = new JSONObject(jsonString);
-            Log.d(TAG, "parseJson: "+jsonObject.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            jsonArray = new JSONArray(jsonObject.getJSONArray("results"));
-            Log.d(TAG, "parseJson: "+jsonArray.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void parseJson(Response<List<String>> response){
+//
+//        try {
+//            jsonObject = new JSONObject(jsonString);
+//            Log.d(TAG, "parseJson: "+jsonObject.toString());
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            jsonArray = new JSONArray(jsonObject.getJSONArray("results"));
+//            Log.d(TAG, "parseJson: "+jsonArray.toString());
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
