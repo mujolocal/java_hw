@@ -1,6 +1,7 @@
 package com.example.javaproject.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Adapte
         this.assets = assets;
     }
 
+    private static final String TAG = "RecyclerAdapter";
     @NonNull
     @Override
     public AdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Adapte
 
     @Override
     public void onBindViewHolder(@NonNull AdapterViewHolder holder, int position) {
-        holder.setLayout(assets.get(position).getTitle());
+        holder.setLayout(assets.get(position));
     }
 
     @Override
@@ -47,10 +49,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Adapte
         public AdapterViewHolder(@NonNull AssetImageBinding assetImageBinding ) {
             super(assetImageBinding.getRoot());
             this.binding = assetImageBinding;
+
         }
 
-        public void setLayout(String name){
-            binding.txt.setText(name);
+        public void setLayout(Anime anime){
+            binding.txt.setText(anime.getTitle());
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
 
     }

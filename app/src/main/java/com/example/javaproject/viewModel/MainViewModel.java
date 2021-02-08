@@ -34,9 +34,7 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onResponse(Call<AnimeResponse> call, Response<AnimeResponse> response) {
                 animeResponse.setValue(response.body());
-                Log.d(TAG, "onResponse: worked");
-                Log.d(TAG, "onResponse: "+response.body().toString());
-                Log.d(TAG, "onResponse: "+call.toString());
+
             }
 
             @Override
